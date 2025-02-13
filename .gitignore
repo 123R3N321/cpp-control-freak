@@ -33,3 +33,24 @@
 
 # idea specific ignore
 .idea/
+
+# Ignore all compiled executables (chatgpt generated)
+*.[oa]
+# object files
+
+*.out
+# output binaries
+
+*.exe
+# executables (Windows)
+
+*.so
+# shared libraries
+
+*.dylib
+# macOS dynamic libraries
+
+*.dll
+# Windows DLLs
+
+main
