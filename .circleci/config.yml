@@ -58,11 +58,13 @@ jobs:
             ls -lah vcpkg  # Ensure vcpkg directory exists
             cat vcpkg/bootstrap-vcpkg.sh | head -n 40  # Show first 40 lines of the script for inspection
             ./vcpkg/bootstrap-vcpkg.sh || (echo "vcpkg bootstrap failed!" && exit 1)
-
       - persist_to_workspace:
           root: .
           paths:
-            - vcpkg
+            - vcpkg  # Persist vcpkg directory for next jobs
+            - /usr/local/bin  # Persist binaries like vcpkg to next jobs
+            - /usr/bin  # Include binaries if needed
+            - /bin  # Include other essential system binaries if necessary
 
   build:
     executor: cpp-executor
@@ -84,7 +86,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build
+            - build  # Persist the build artifacts to next jobs
 
   test:
     executor: cpp-executor
