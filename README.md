@@ -11,7 +11,7 @@ dictates that we set up the basics first
 | ClangFormat    | :white_check_mark: |
 | ClangTidy      | Ren is on it now   |
 | gcov           | -                  |
-| CircleCI       | Almost there       |
+| CircleCI       | :white_check_mark: |
 
 ## Message to my dear, dear teammates:
  Ren: I am running this using Clion IDE on a Ubuntu machine, careful if you are on Mac/VSCode!
