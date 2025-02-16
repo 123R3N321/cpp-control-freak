@@ -89,7 +89,10 @@ jobs:
           name: Build
           command: |
             export PATH=/opt/cmake/bin:$PATH
-            echo "!!!!!!!!!!!!!!!!!Current PATH: $PATH"  # Debug: Verify the PATH
+            echo "!!!!!!!!!!!--------------------!!!!!!Current PATH: $PATH"  # Debug: Verify the PATH
+            ./vcpkg/vcpkg install gtest
+            ./vcpkg/vcpkg list | grep gtest
+            echo"!!!!!!!!!!!!!!see above!!!!!!!!!!!!"
             which cmake
             cmake --version
             cmake --build build
