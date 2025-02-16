@@ -41,18 +41,22 @@ jobs:
               cmake \
               curl \
               zip \
-              unzip            
+              unzip \
               tar \
               git \
               python3 \
               tzdata
+      - run:
+          name: Verify tar installation
+          command: |
+            tar --version
       - run:
           name: Install vcpkg with debug logs
           command: |
             set -x  # Enable debugging
             git clone https://github.com/microsoft/vcpkg.git
             ls -lah vcpkg  # Ensure vcpkg directory exists
-            cat vcpkg/bootstrap-vcpkg.sh | head -n 20  # Show first lines of the script
+            cat vcpkg/bootstrap-vcpkg.sh | head -n 40  # Show first 40 lines of the script for inspection
             ./vcpkg/bootstrap-vcpkg.sh || (echo "vcpkg bootstrap failed!" && exit 1)
 
       - persist_to_workspace:
