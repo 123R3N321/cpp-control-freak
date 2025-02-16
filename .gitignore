@@ -33,6 +33,7 @@
 
 # idea specific ignore
 .idea/
+build/
 
 # Ignore all compiled executables (chatgpt generated)
 *.[oa]
