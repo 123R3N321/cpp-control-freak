@@ -55,3 +55,8 @@ build/
 # Windows DLLs
 
 main
+
+
+# vcpkg
+vcpkg_installed
+vcpkg
