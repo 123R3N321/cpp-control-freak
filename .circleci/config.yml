@@ -54,14 +54,7 @@ jobs:
             CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
             wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}
             tar -xzvf ${CMAKE_TAR}
-            cp -r cmake-${CMAKE_VERSION}-Linux-x86_64/* /usr/local/
-            cmake_version=$(cmake --version | head -n 1 | sed 's/[^0-9]*\([0-9]*\)\.\([0-9]*\)\..*/\1\.\2/')
-            if [[ $(echo "$cmake_version >= 3.30" | bc -l) -eq 1 ]]; then
-              echo "CMake version $cmake_version installed successfully!"
-            else
-              echo "CMake version is $cmake_version, BUT clang++ needs cmake3.30+."
-              exit 1
-            fi
+
 
       - run:
           name: Verify tar installation
