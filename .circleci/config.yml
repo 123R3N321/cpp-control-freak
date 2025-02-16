@@ -11,7 +11,7 @@ executors:
       DEBIAN_FRONTEND: noninteractive  # Ensures non-interactive installation
 
 jobs:
-  setup:
+  build_and_test:
     executor: cpp-executor
     steps:
       - checkout
@@ -58,20 +58,6 @@ jobs:
             ls -lah vcpkg  # Ensure vcpkg directory exists
             cat vcpkg/bootstrap-vcpkg.sh | head -n 40  # Show first 40 lines of the script for inspection
             ./vcpkg/bootstrap-vcpkg.sh || (echo "vcpkg bootstrap failed!" && exit 1)
-      - persist_to_workspace:
-          root: .
-          paths:
-            - vcpkg  # Persist vcpkg directory for next jobs
-            - /usr/local/bin  # Persist binaries like vcpkg to next jobs
-            - /usr/bin  # Include binaries if needed
-            - /bin  # Include other essential system binaries if necessary
-
-  build:
-    executor: cpp-executor
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
       - run:
           name: Install project dependencies
           command: |
@@ -83,38 +69,15 @@ jobs:
       - run:
           name: Build
           command: cmake --build build
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build  # Persist the build artifacts to next jobs
-
-  test:
-    executor: cpp-executor
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
       - run:
           name: Run tests
           command: ctest --test-dir build --output-on-failure
-
-  lint:
-    executor: cpp-executor
-    steps:
-      - checkout
       - run:
           name: Run Clang-Format
           command: find . -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror
       - run:
           name: Run Clang-Tidy
           command: clang-tidy -p build -checks='*' src/*.cpp
-
-  coverage:
-    executor: cpp-executor
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
       - run:
           name: Generate Coverage
           command: |
@@ -127,16 +90,4 @@ workflows:
   version: 2
   cpp_pipeline:
     jobs:
-      - setup
-      - build:
-          requires:
-            - setup
-      - test:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
-      - coverage:
-          requires:
-            - test
+      - build_and_test
