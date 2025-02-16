@@ -19,7 +19,9 @@ jobs:
           name: Fix CA Certificates
           command: |
             apt update && apt install -y --no-install-recommends ca-certificates
-            update-ca-certificates
+            if command -v update-ca-certificates > /dev/null; then
+              update-ca-certificates
+            fi
       - run:
           name: Set timezone to UTC
           command: |
