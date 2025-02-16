@@ -80,6 +80,10 @@ jobs:
       - run:
           name: Configure CMake
           command: |
+            export PATH=/opt/cmake/bin:$PATH
+            echo "!!!!!!!!!!!!!!!!!Current PATH: $PATH"  # Debug: Verify the PATH
+            which cmake
+            cmake --version
             cmake -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_CXX_COMPILER=clang++
       - run:
           name: Build
