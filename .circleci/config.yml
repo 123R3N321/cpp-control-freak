@@ -45,6 +45,7 @@ jobs:
               tar \
               git \
               python3 \
+              pkg-config \  # Added pkg-config
               tzdata
       - run:
           name: Verify tar installation
@@ -85,6 +86,7 @@ jobs:
       - store_artifacts:
           path: coverage.html
           destination: coverage
+
 
 workflows:
   version: 2
