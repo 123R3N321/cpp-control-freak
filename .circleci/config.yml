@@ -47,7 +47,7 @@ jobs:
               pkg-config \
               tzdata \
               wget
-            apt install -y software-properties-common lsb-release && \
+            apt install -y software-properties-common && \
             apt clean all
             wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
             apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main"
@@ -60,8 +60,6 @@ jobs:
               echo "CMake version is $cmake_version, BUT clang++ needs cmake3.30+."
               exit 1
             fi
-
-      
 
       - run:
           name: Verify tar installation
