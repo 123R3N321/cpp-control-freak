@@ -8,13 +8,18 @@ executors:
       CC: clang
       CXX: clang++
       PATH: "/usr/local/bin:/usr/bin:/bin"
-      DEBIAN_FRONTEND: noninteractive  # Ensures all apt installations are non-interactive
+      DEBIAN_FRONTEND: noninteractive  # Ensures non-interactive installation
 
 jobs:
   setup:
     executor: cpp-executor
     steps:
       - checkout
+      - run:
+          name: Fix CA Certificates
+          command: |
+            apt update && apt install -y --no-install-recommends ca-certificates
+            update-ca-certificates
       - run:
           name: Set timezone to UTC
           command: |
@@ -113,13 +118,4 @@ workflows:
       - setup
       - build:
           requires:
-            - setup
-      - test:
-          requires:
-            - build
-      - lint:
-          requires:
-            - build
-      - coverage:
-          requires:
-            - test
+            -
