@@ -54,7 +54,7 @@ jobs:
             CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
             wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}
             tar -xzvf ${CMAKE_TAR}
-            cd cmake-${CMAKE_VERSION}-Linux-x86_64/
+            cd cmake-${CMAKE_VERSION}-linux-x86_64/
             ./bootstrap
             make
             make install
