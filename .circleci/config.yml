@@ -45,7 +45,8 @@ jobs:
               git \
               python3 \
               pkg-config \
-              tzdata
+              tzdata \
+              wget
             apt install -y software-properties-common
             wget -qO- https://apt.kitware.com/keys/kitware.asc | tee /etc/apt/trusted.gpg.d/kitware.asc
             echo "deb https://apt.kitware.com/ubuntu/ $(lsb_release -c | awk '{print $2}') main" | tee /etc/apt/sources.list.d/kitware.list
