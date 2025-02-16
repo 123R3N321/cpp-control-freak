@@ -55,9 +55,8 @@ jobs:
             wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}
             tar -xzvf ${CMAKE_TAR}
             mv cmake-${CMAKE_VERSION}-linux-x86_64 /opt/cmake
-            echo "export PATH=/opt/cmake/bin:\$PATH" >> ~/.bashrc
-            source ~/.bashrc
             export PATH=/opt/cmake/bin:$PATH
+            echo "!!!!!!!!!!!!!!!!!Current PATH: $PATH"  # Debug: Verify the PATH
             which cmake
             cmake --version
 
