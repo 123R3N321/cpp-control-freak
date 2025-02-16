@@ -108,6 +108,7 @@ jobs:
       - run:
           name: Run Clang-Tidy  # only main.cpp
           command: |
+            export PATH=/opt/cmake/bin:$PATH
             cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
             clang-tidy -p build -checks='*' main.cpp
       - run:
