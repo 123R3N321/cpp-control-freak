@@ -41,7 +41,7 @@ jobs:
               cmake \
               curl \
               zip \
-              unzip \            
+              unzip            
               tar \
               git \
               python3 \
