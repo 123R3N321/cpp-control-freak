@@ -57,6 +57,9 @@ jobs:
             mv cmake-${CMAKE_VERSION}-linux-x86_64 /opt/cmake
             echo "export PATH=/opt/cmake/bin:\$PATH" >> ~/.bashrc
             source ~/.bashrc
+            export PATH=/opt/cmake/bin:$PATH
+            which cmake
+            cmake --version
 
 
       - run:
