@@ -46,10 +46,12 @@ jobs:
               python3 \
               pkg-config \
               tzdata \
-              wget
-            apt install -y software-properties-common
-            wget -qO- https://apt.kitware.com/keys/kitware.asc | tee /etc/apt/trusted.gpg.d/kitware.asc
-            echo "deb https://apt.kitware.com/ubuntu/ $(lsb_release -c | awk '{print $2}') main" | tee /etc/apt/sources.list.d/kitware.list
+              wget \
+              tee
+            apt install -y software-properties-common lsb-release && \
+            apt clean all
+            wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+            apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main"
             apt update
             apt install -y cmake
             cmake_version=$(cmake --version | head -n 1 | sed 's/[^0-9]*\([0-9]*\)\.\([0-9]*\)\..*/\1\.\2/')
