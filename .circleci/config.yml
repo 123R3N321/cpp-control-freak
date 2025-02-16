@@ -47,6 +47,10 @@ jobs:
               python3 \
               tzdata
       - run:
+          name: Verify tar installation
+          command: |
+            tar --version
+      - run:
           name: Install vcpkg with debug logs
           command: |
             set -x  # Enable debugging
