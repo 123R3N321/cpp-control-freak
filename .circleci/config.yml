@@ -38,7 +38,6 @@ jobs:
               gcovr \
               lcov \
               ninja-build \
-              cmake \
               curl \
               zip \
               unzip \
@@ -47,11 +46,19 @@ jobs:
               python3 \
               pkg-config \
               tzdata
-            apt remove -y cmake
             apt install -y software-properties-common
-            add-apt-repository ppa:george-edison55/cmake-3.x -y
+            wget -qO- https://apt.kitware.com/keys/kitware.asc | tee /etc/apt/trusted.gpg.d/kitware.asc
+            echo "deb https://apt.kitware.com/ubuntu/ $(lsb_release -c | awk '{print $2}') main" | tee /etc/apt/sources.list.d/kitware.list
             apt update
             apt install -y cmake
+            cmake_version=$(cmake --version | head -n 1 | sed 's/[^0-9]*\([0-9]*\)\.\([0-9]*\)\..*/\1\.\2/')
+            if [[ $(echo "$cmake_version >= 3.30" | bc -l) -eq 1 ]]; then
+              echo "CMake version $cmake_version installed successfully!"
+            else
+              echo "CMake version is $cmake_version, BUT clang++ needs cmake3.30+."
+              exit 1
+            fi
+
       
 
       - run:
