@@ -50,7 +50,7 @@ jobs:
               pkg-config \
               tzdata \
               wget
-            CMAKE_VERSION=3.30.7
+            CMAKE_VERSION=3.31.5
             CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
             wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}
             tar -xzvf ${CMAKE_TAR}
