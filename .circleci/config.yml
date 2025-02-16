@@ -47,6 +47,12 @@ jobs:
               python3 \
               pkg-config \
               tzdata
+            sudo apt remove -y cmake
+            sudo apt install -y software-properties-common
+            sudo add-apt-repository ppa:george-edison55/cmake-3.x -y
+            sudo apt update
+            sudo apt install -y cmake
+      
 
       - run:
           name: Verify tar installation
