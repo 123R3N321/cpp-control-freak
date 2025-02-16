@@ -103,7 +103,8 @@ jobs:
             ctest --test-dir build --output-on-failure
       - run:
           name: Run Clang-Format
-          command: find . -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror
+          command: |  #exclude binaries
+            find . -path ./build -prune -o -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror
       - run:
           name: Run Clang-Tidy
           command: clang-tidy -p build -checks='*' src/*.cpp
