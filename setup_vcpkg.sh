@@ -14,3 +14,13 @@ if [ -z "$VCPKG_ROOT" ]; then
   export VCPKG_ROOT="$(pwd)/vcpkg"
   export PATH=$VCPKG_ROOT:$PATH
 fi
+
+# install gtest dependency
+vcpkg install gtest
+
+# to build and run:
+#
+# cmake -B build -S . --preset debug
+# cmake --build build
+# cd build && ctest
+# cd -
