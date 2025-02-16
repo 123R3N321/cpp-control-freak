@@ -98,10 +98,6 @@ jobs:
           name: Run tests
           command: |
             export PATH=/opt/cmake/bin:$PATH
-            echo "!!!!!!!!!!!!!!!!!look here!!!Current PATH: $PATH"  # Debug: Verify the PATH
-            ./vcpkg/vcpkg install gtest
-            ./vcpkg/vcpkg list | grep gtest
-            echo"!!!!!!!!!!!!!!see above!!!!!!!!!!!!"
             which cmake
             cmake --version
             ctest --test-dir build --output-on-failure
