@@ -115,9 +115,9 @@ jobs:
 #          name: Generate Coverage
 #          command: |
 #            gcovr -r . --html --html-details -o coverage.html
-      - store_artifacts:
-          path: coverage.html
-          destination: coverage
+#      - store_artifacts:
+#          path: coverage.html
+#          destination: coverage
 
 
 workflows:
