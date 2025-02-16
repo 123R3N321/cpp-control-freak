@@ -7,11 +7,11 @@ dictates that we set up the basics first
 |----------------|--------------------|
 | Clang Compiler | :white_check_mark: |
 | Google Test    | -                  |
-| vcpkg          | -                  |
-| ClangFormat    | -                  |
-| ClangTidy      | -                  |
+| vcpkg          | :white_check_mark: |
+| ClangFormat    | :white_check_mark: |
+| ClangTidy      | Ren is on it now   |
 | gcov           | -                  |
-| CircleCI       | -                  |
+| CircleCI       | Almost there       |
 
 ## Message to my dear, dear teammates:
  Ren: I am running this using Clion IDE on a Ubuntu machine, careful if you are on Mac/VSCode!
