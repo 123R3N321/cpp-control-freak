@@ -47,11 +47,14 @@ jobs:
               python3 \
               tzdata
       - run:
-          name: Install vcpkg
+          name: Install vcpkg with debug logs
           command: |
+            set -x  # Enable debugging
             git clone https://github.com/microsoft/vcpkg.git
-            ./vcpkg/bootstrap-vcpkg.sh
-            ./vcpkg/vcpkg integrate install
+            ls -lah vcpkg  # Ensure vcpkg directory exists
+            cat vcpkg/bootstrap-vcpkg.sh | head -n 20  # Show first lines of the script
+            ./vcpkg/bootstrap-vcpkg.sh || (echo "vcpkg bootstrap failed!" && exit 1)
+
       - persist_to_workspace:
           root: .
           paths:
