@@ -45,7 +45,7 @@ jobs:
               tar \
               git \
               python3 \
-              pkg-config \  # Added pkg-config
+              pkg-config \ 
               tzdata
       - run:
           name: Verify tar installation
