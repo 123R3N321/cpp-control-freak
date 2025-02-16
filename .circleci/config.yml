@@ -73,6 +73,8 @@ jobs:
       - run:
           name: Install project dependencies
           command: |
+            apt update && apt install -y --no-install-recommends \
+            curl
             ./vcpkg/vcpkg install gtest
       - run:
           name: Configure CMake
