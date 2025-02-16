@@ -8,6 +8,7 @@ executors:
       CC: clang
       CXX: clang++
       PATH: "/usr/local/bin:/usr/bin:/bin"
+      DEBIAN_FRONTEND: noninteractive  # Ensures all apt installations are non-interactive
 
 jobs:
   setup:
@@ -15,9 +16,15 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Set timezone to UTC
+          command: |
+            ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            echo "tzdata tzdata/Areas select Etc" | debconf-set-selections
+            echo "tzdata tzdata/Zones/Etc select UTC" | debconf-set-selections
+      - run:
           name: Install dependencies
           command: |
-            apt update && apt install -y \
+            apt update && apt install -y --no-install-recommends \
               clang \
               clang-tidy \
               clang-format \
@@ -29,7 +36,8 @@ jobs:
               unzip \
               tar \
               git \
-              python3
+              python3 \
+              tzdata
       - run:
           name: Install vcpkg
           command: |
