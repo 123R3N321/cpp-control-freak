@@ -40,8 +40,8 @@ jobs:
               ninja-build \
               cmake \
               curl \
-              unzip \
-              zip \            
+              zip \
+              unzip \            
               tar \
               git \
               python3 \
