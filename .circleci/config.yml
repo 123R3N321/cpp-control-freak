@@ -47,10 +47,6 @@ jobs:
               python3 \
               tzdata
       - run:
-          name: Verify tar installation
-          command: |
-            tar --version
-      - run:
           name: Install vcpkg with debug logs
           command: |
             set -x  # Enable debugging
@@ -63,6 +59,9 @@ jobs:
           root: .
           paths:
             - vcpkg
+            - /usr/local/bin
+            - /usr/bin
+            - /bin
 
   build:
     executor: cpp-executor
@@ -73,8 +72,6 @@ jobs:
       - run:
           name: Install project dependencies
           command: |
-            apt update && apt install -y --no-install-recommends \
-            curl
             ./vcpkg/vcpkg install gtest
       - run:
           name: Configure CMake
