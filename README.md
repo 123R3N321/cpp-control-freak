@@ -9,8 +9,8 @@ dictates that we set up the basics first
 | Google Test    | -                  |
 | vcpkg          | :white_check_mark: |
 | ClangFormat    | :white_check_mark: |
-| ClangTidy      | Ren is on it now   |
-| gcov           | -                  |
+| ClangTidy      | :white_check_mark: |
+| gcov           | Ren is on it!      |
 | CircleCI       | :white_check_mark: |
 
 ## Message to my dear, dear teammates:
