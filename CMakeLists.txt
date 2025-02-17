@@ -80,6 +80,8 @@ gtest_discover_tests(notifier_test)
 gtest_discover_tests(integ_test)
 gtest_discover_tests(e2e_test)
 
+add_executable(gcov ${CMAKE_SOURCE_DIR}/src/main.cpp)
+
 add_custom_command(TARGET gcov
     COMMAND echo "=================== GCOV ===================="
     COMMAND gcov -b ${CMAKE_SOURCE_DIR}/src/*.cpp -o ${OBJECT_DIR}
