@@ -5,7 +5,7 @@
 
 class Logger {
 public:
-    void logOperation(const std::string& operation, double operand1, double operand2, double result);
+    void logOperation(const std::string &operation, double operand1, double operand2, double result);
 };
 
 #endif
