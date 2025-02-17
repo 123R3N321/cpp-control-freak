@@ -111,12 +111,12 @@ jobs:
           command: |
             clang-format --dry-run --Werror $(find Components/ -type f \( -name "*.cpp" -o -name "*.h" \) ! -path "Components/calculator.cpp") main.cpp
 
-#      - run:
-#          name: Run Clang-Tidy  # only main.cpp
-#          command: |
-#            export PATH=/opt/cmake/bin:$PATH
-#            cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
-#            clang-tidy -p build -checks='*' main.cpp
+      - run:
+          name: Run Clang-Tidy  # only main.cpp
+          command: |
+            export PATH=/opt/cmake/bin:$PATH
+            cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES
+            clang-tidy -p build -checks='*' main.cpp
 #      - run:
 #          name: Generate Coverage
 #          command: |
