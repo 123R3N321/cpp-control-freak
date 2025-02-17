@@ -123,7 +123,6 @@ jobs:
           command: |  # shouldn't need to run tests again.
             cd .. # get back out from build
             echo "LLOOOOOKKKKK HHEEERRREEEEEE!!!!!!!!!!!!!!!!!!1"
-#            ls -a *.gcda we don have them
             ls -a *.gcno
             echo "LLOOOOOKKKKK HHEEERRREEEEEE!!!!!!!!!!!!!!!!!!1"
             gcovr -r . --html --html-details -o coverage.html
