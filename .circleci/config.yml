@@ -105,8 +105,6 @@ jobs:
             export GTEST_OUTPUT=xml:${TEST_RESULTS}/
             mkdir -p $TEST_RESULTS
             ctest --test-dir build --output-on-failure
-            echo "HHHHHHEEEEERRRREREEEEE"
-            ctest -T Coverage
       - store_test_results:
           path: /tmp/test-results
       - run:
@@ -125,6 +123,7 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             cd .. # get back out from build
+            make gcov
             gcovr -r . --html --html-details -o coverage.html
             cat coverage.html
       - store_artifacts:
