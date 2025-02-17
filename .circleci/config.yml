@@ -118,10 +118,10 @@ jobs:
             cd build
             cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES ..
             run-clang-tidy -p .
-#      - run:
-#          name: Generate Coverage
-#          command: |
-#            gcovr -r . --html --html-details -o coverage.html
+      - run:
+          name: Generate Coverage
+          command: |  # shouldn't need to run tests again.
+            gcovr -r . --html --html-details -o coverage.html
 #      - store_artifacts:
 #          path: coverage.html
 #          destination: coverage
