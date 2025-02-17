@@ -89,3 +89,6 @@ add_custom_command(TARGET gcov
     COMMAND echo "-- Coverage files have been output to ${CMAKE_BINARY_DIR}"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     )
+
+SET(CMAKE_CXX_FLAGS "-g -O0 --coverage -fprofile-arcs -ftest-coverage")
+SET(CMAKE_C_FLAGS "-g -O0 --coverage -fprofile-arcs -ftest-coverage")
