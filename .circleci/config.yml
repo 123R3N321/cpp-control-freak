@@ -122,7 +122,7 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             cd .. # get back out from build
-            make gcov
+#            make gcov
             gcovr -r . --html --html-details -o coverage.html
             cat coverage.html
       - store_artifacts:
