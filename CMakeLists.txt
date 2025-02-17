@@ -53,7 +53,7 @@ add_executable(integ_test
 )
 
 # Link GoogleTest to the test executables
-target_link_libraries(calculator_test GTest::gtest_main calculator)
+target_link_libraries(calculator_test GTest::gtest_main GTest::gmock calculator)
 target_link_libraries(logger_test GTest::gtest_main logger)
 target_link_libraries(notifier_test GTest::gtest_main notifier)
 target_link_libraries(integ_test GTest::gtest_main GTest::gmock calculator logger notifier)

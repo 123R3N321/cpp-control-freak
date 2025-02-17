@@ -1,12 +1,26 @@
 #include "gtest/gtest.h"
+#include <gmock/gmock.h>
 #include "../Components/calculator.hpp"
 #include "../Components/logger.hpp"
 #include "../Components/notifier.hpp"
 
+
+class MockNotifier : public Notifier {
+public:
+    MockNotifier(int threshold) : Notifier(threshold) {}
+    MOCK_METHOD(void, sendAlert, (double));
+};
+
+class MockLogger : public Logger {
+public:
+    MockLogger() : Logger() {}
+    MOCK_METHOD(void, logOperation, (const std::string, double, double, double));
+};
+
 class CalculatorTest : public ::testing::Test {
 protected:
-    Logger logger;
-    Notifier notifier{50}; // Set threshold to 50
+    MockLogger logger;
+    MockNotifier notifier{50}; // Set threshold to 50
     Calculator calc{logger, notifier};
 };
 
