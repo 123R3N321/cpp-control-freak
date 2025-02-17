@@ -9,6 +9,7 @@ executors:
       CXX: clang++
       PATH: "/usr/local/bin:/usr/bin:/bin"
       DEBIAN_FRONTEND: noninteractive  # Ensures non-interactive installation
+      TEST_RESULTS: /tmp/test-results
 
 jobs:
   build_and_test:
@@ -100,9 +101,11 @@ jobs:
             export PATH=/opt/cmake/bin:$PATH
             which cmake
             cmake --version
+            export GTEST_OUTPUT=xml:${TEST_RESULTS}/
+            mkdir -p $TEST_RESULTS
             ctest --test-dir build --output-on-failure
       - store_test_results:
-          path: build
+          path: /tmp/test-results
       - run:
           name: Run Clang-Format
           command: |  #I'm only doing main.cpp check 
