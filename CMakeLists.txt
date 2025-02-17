@@ -85,7 +85,7 @@ add_executable(gcov ${CMAKE_SOURCE_DIR}/main.cpp)
 add_custom_command(TARGET gcov
     COMMAND echo "=================== GCOV ===================="
     COMMAND gcov -b ${CMAKE_SOURCE_DIR}/*.cpp -o ${OBJECT_DIR}
-    COMMAND echo "-- Source diretorie: ${CMAKE_SOURCE_DIR}/src/"
-    COMMAND echo "-- Coverage files have been output to ${CMAKE_BINARY_DIR}/gcoverage"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/gcoverage
+    COMMAND echo "-- Source diretorie: ${CMAKE_SOURCE_DIR}"
+    COMMAND echo "-- Coverage files have been output to ${CMAKE_BINARY_DIR}/coverage"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/coverage
     )
