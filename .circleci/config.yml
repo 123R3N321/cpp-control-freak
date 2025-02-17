@@ -51,8 +51,6 @@ jobs:
               pkg-config \
               tzdata \
               wget
-            apt-get install clang-18 libclang-18-dev  # this is for gcov
-            export LIBCLANG_RT_PROFILE=/usr/lib/llvm-18/lib/clang/18/lib/linux  #path set explicitly
             CMAKE_VERSION=3.31.5
             CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
             wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}
