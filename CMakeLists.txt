@@ -49,16 +49,17 @@ add_executable(notifier_test
 )
 
 # Link GoogleTest to the test executables
-target_link_libraries(calculator_test GTest::GTest GTest::Main calculator)
-target_link_libraries(logger_test GTest::GTest GTest::Main logger)
-target_link_libraries(notifier_test GTest::GTest GTest::Main GMock::GMock notifier)
+target_link_libraries(calculator_test GTest::gtest_main calculator)
+target_link_libraries(logger_test GTest::gtest_main logger)
+target_link_libraries(notifier_test GTest::gtest_main GTest::gmock notifier)
 
 # Include directories (if needed, to include headers)
 target_include_directories(calculator_test PRIVATE Components)
 target_include_directories(logger_test PRIVATE Components)
 target_include_directories(notifier_test PRIVATE Components)
 
-# Define individual tests
-add_test(NAME CalculatorTest COMMAND calculator_test)
-add_test(NAME LoggerTest COMMAND logger_test)
-add_test(NAME NotifierTest COMMAND notifier_test)
+# Discover individual tests
+include(GoogleTest)
+gtest_discover_tests(calculator_test)
+gtest_discover_tests(logger_test)
+gtest_discover_tests(notifier_test)
