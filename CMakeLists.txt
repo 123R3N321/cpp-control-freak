@@ -80,11 +80,11 @@ gtest_discover_tests(notifier_test)
 gtest_discover_tests(integ_test)
 gtest_discover_tests(e2e_test)
 
-add_executable(gcov ${CMAKE_SOURCE_DIR}/src/main.cpp)
+add_executable(gcov ${CMAKE_SOURCE_DIR}/main.cpp)
 
 add_custom_command(TARGET gcov
     COMMAND echo "=================== GCOV ===================="
-    COMMAND gcov -b ${CMAKE_SOURCE_DIR}/src/*.cpp -o ${OBJECT_DIR}
+    COMMAND gcov -b ${CMAKE_SOURCE_DIR}/*.cpp -o ${OBJECT_DIR}
     COMMAND echo "-- Source diretorie: ${CMAKE_SOURCE_DIR}/src/"
     COMMAND echo "-- Coverage files have been output to ${CMAKE_BINARY_DIR}/gcoverage"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/gcoverage
