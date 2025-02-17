@@ -122,9 +122,10 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             gcovr -r . --html --html-details -o coverage.html
-#      - store_artifacts:
-#          path: coverage.html
-#          destination: coverage
+            cat coverage.html
+      - store_artifacts:
+          path: coverage.html
+          destination: coverage
 
 
 workflows:
