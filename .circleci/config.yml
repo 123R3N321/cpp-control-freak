@@ -101,6 +101,8 @@ jobs:
             which cmake
             cmake --version
             ctest --test-dir build --output-on-failure
+      - store_test_results:
+          path: build
       - run:
           name: Run Clang-Format
           command: |  #I'm only doing main.cpp check 
