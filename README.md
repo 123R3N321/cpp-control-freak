@@ -3,14 +3,14 @@ This is a template. A generic starting point for a cpp repo. Absolutely paranoid
 The homework [description](https://docs.google.com/document/d/1vFZkZ5bA1FIVR2LqerlN2Zq71Uu84auAXmgszdNiBTU/edit?tab=t.0#heading=h.ovxdy8vfqydg)
 dictates that we set up the basics first
 ## Tasks:
-| Tools          | Implemented        |
-|----------------|--------------------|
+| Tools          | Implemented       |
+|----------------|-------------------|
 | Clang Compiler | :white_check_mark: |
-| Google Test    | -                  |
+| Google Test    | :white_check_mark:|
 | vcpkg          | :white_check_mark: |
 | ClangFormat    | :white_check_mark: |
 | ClangTidy      | :white_check_mark: |
-| gcov           | Ren is on it!      |
+| gcov           | Ren is on it!     |
 | CircleCI       | :white_check_mark: |
 
 ## Message to my dear, dear teammates:
