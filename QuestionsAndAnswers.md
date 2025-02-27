@@ -22,4 +22,14 @@ I enter an infinite halt when installing certain dependencies
 
     -   Second, rename Components/ to src/
 
-    -   "put tests close to the components" (our top-level tests/ is ok) it is recommended we put test together with the components
+    -   "put tests close to the components" (our top-level tests/ is ok) 
+
+    -   cmake has integration for google test- use gtest_discover_tests
+
+    -   add documentation generation
+
+    -   can write e2e test in python-write python script, need to pretend what a user is doing-puppeter library??
+
+    -   include all clang-tidy then only disable those that r needed 
+
+    -   
