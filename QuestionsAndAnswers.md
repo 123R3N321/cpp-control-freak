@@ -32,4 +32,6 @@ I enter an infinite halt when installing certain dependencies
 
     -   include all clang-tidy then only disable those that r needed 
 
-    -   
+    -   nest the header file deeper than the cc file 
+
+    -   look at prof different calculator implementations
