@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../Components/logger.hpp"
+#include "../src/logger.hpp"
 #include <fstream>
 #include <sstream>
 

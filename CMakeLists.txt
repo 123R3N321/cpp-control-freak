@@ -9,21 +9,31 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_CXX_COMPILER clang++) #this enforces compiler choice clang
 
+# setting gcov coverage 
+option(ENABLE_COVERAGE "Enable coverage reporting" ON)
+
+if(ENABLE_COVERAGE)
+    message(STATUS "Coverage enabled")
+    add_compile_options(--coverage -O0 -g -fprofile-arcs -ftest-coverage)
+    add_link_options(--coverage)
+endif()
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
 
 # Add source files for each component
 add_library(calculator
-    Components/calculator.cpp
-    Components/calculator.hpp
+    src/calculator.cpp
+    src/calculator.hpp
 )
 
 add_library(logger
-    Components/logger.cpp
-    Components/logger.hpp
+    src/logger.cpp
+    src/logger.hpp
 )
 
 add_library(notifier
-    Components/notifier.cpp
-    Components/notifier.hpp
+    src/notifier.cpp
+    src/notifier.hpp
 )
 
 # Add the main program (if applicable)
@@ -65,11 +75,11 @@ target_link_libraries(integ_test GTest::gtest_main GTest::gmock calculator logge
 target_link_libraries(e2e_test GTest::gtest_main calculator)
 
 # Include directories (if needed, to include headers)
-target_include_directories(calculator_test PRIVATE Components)
-target_include_directories(logger_test PRIVATE Components)
-target_include_directories(notifier_test PRIVATE Components)
-target_include_directories(integ_test PRIVATE Components)
-target_include_directories(e2e_test PRIVATE Components)
+target_include_directories(calculator_test PRIVATE src)
+target_include_directories(logger_test PRIVATE src)
+target_include_directories(notifier_test PRIVATE src)
+target_include_directories(integ_test PRIVATE src)
+target_include_directories(e2e_test PRIVATE src)
 
 
 # Discover individual tests
@@ -82,10 +92,28 @@ gtest_discover_tests(e2e_test)
 
 add_executable(gcov ${CMAKE_SOURCE_DIR}/main.cpp)
 
-add_custom_command(TARGET gcov
-    COMMAND echo "=================== GCOV ===================="
-    COMMAND gcov -b ${CMAKE_SOURCE_DIR}/*.cpp -o ${OBJECT_DIR}
-    COMMAND echo "-- Source diretorie: ${CMAKE_SOURCE_DIR}"
-    COMMAND echo "-- Coverage files have been output to ${CMAKE_BINARY_DIR}"
+# add gcov compile option
+if(ENABLE_COVERAGE)
+    target_compile_options(calculator_test PRIVATE --coverage)
+    target_link_options(calculator_test PRIVATE --coverage)
+    
+    target_compile_options(logger_test PRIVATE --coverage)
+    target_link_options(logger_test PRIVATE --coverage)
+    
+    target_compile_options(notifier_test PRIVATE --coverage)
+    target_link_options(notifier_test PRIVATE --coverage)
+
+    target_compile_options(integ_test PRIVATE --coverage)
+    target_link_options(integ_test PRIVATE --coverage)
+
+    target_compile_options(e2e_test PRIVATE --coverage)
+    target_link_options(e2e_test PRIVATE --coverage)
+endif()
+
+add_custom_target(coverage
+    COMMAND ${CMAKE_CTEST_COMMAND}
+    COMMAND gcov -b ${CMAKE_SOURCE_DIR}/src/*.cpp
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    )
+    COMMENT "Generating code coverage report..."
+)
+

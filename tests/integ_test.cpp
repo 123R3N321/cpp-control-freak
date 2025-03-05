@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "../Components/calculator.hpp"
-#include "../Components/notifier.hpp"
-#include "../Components/logger.hpp"
+#include "../src/calculator.hpp"
+#include "../src/notifier.hpp"
+#include "../src/logger.hpp"
 #include <fstream>
 #include <sstream>
 

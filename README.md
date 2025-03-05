@@ -15,3 +15,31 @@ dictates that we set up the basics first
 
 ## Message to my dear, dear teammates:
  Ren: I am running this using Clion IDE on a Ubuntu machine, careful if you are on Mac/VSCode!
+
+ How to setup:
+
+ run 
+```bash
+./setup_vcpkg.sh
+```
+to clone vcpkg, install gtest and put it in your local repository
+
+to build and run:
+```bash
+cmake -B build -S . --preset debug
+cmake --build build
+cd build && ctest
+cd -
+```
+
+for coverage in html run:
+```bash
+cmake -B build -DENABLE_COVERAGE=ON
+cmake --build build
+cd build
+ctest
+make coverage
+lcov --capture --directory . --output-file coverage.info --ignore-errors inconsistent
+genhtml coverage.info --output-directory coverage_report
+```
+this makes a directory called coverage_report, then under v1 there are a bunch of html files to readily see cov
