@@ -35,6 +35,13 @@
 .idea/
 build/
 
+# VSCode config dir
+.vscode/
+
+# Mac stuff
+.DS_Store
+
+
 # Ignore all compiled executables (chatgpt generated)
 *.[oa]
 # object files
@@ -60,6 +67,7 @@ main
 # vcpkg
 vcpkg_installed
 vcpkg
+vcpkg-configuration.json
 
 *.cmake
 CMakeFiles
