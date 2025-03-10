@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.30)
 project(cpp-control-freak)
 
+# to connect build to vcpkg
+set(CMAKE_TOOLCHAIN_FILE ./vcpkg/scripts/buildsystems/vcpkg.cmake)
+
 ### gtest setup ###
 enable_testing()
 find_package(GTest CONFIG REQUIRED)
