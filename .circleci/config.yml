@@ -39,7 +39,6 @@ jobs:
               clang \
               clang-tidy \
               clang-format \
-              gcov \
               lcov \
               ninja-build \
               curl \
