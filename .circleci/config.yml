@@ -86,9 +86,11 @@ jobs:
             cmake --version
             cmake -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_CXX_COMPILER=clang++
       - run:
-          name: Build
+          name: Build # check existence of the path with ls command,
           command: |
             export PATH=/opt/cmake/bin:$PATH
+            ls /usr/lib/llvm-18/lib/clang/18/lib/linux/
+            cmake -B build -S . -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             which cmake
             cmake --version
