@@ -78,6 +78,8 @@ jobs:
             ls /usr/lib/llvm-*/lib/clang/
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             export PATH=/opt/cmake/bin:$PATH
+            export VCPKG_ROOT=/root/project/vcpkg
+            export PATH=$VCPKG_ROOT:$PATH
             cmake -B build -S . --preset debug -DENABLE_COVERAGE=ON \
               -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             echo "below is verbose build fail message"
