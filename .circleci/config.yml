@@ -71,9 +71,6 @@ jobs:
             set -x  # Enable debugging
             source ./setup_vcpkg.sh
       - run:
-          name: Configure CMake
-          command: |
-      - run:
           name: Build
           command: |
             apt install llvm-18 clang-18
@@ -82,7 +79,7 @@ jobs:
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             export PATH=/opt/cmake/bin:$PATH
             cmake -B build -S . --preset debug -DENABLE_COVERAGE=ON \
-                -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
+              -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             echo "below is verbose build fail message"
             cmake --build build -v
       - run:
