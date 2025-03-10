@@ -92,13 +92,10 @@ jobs:
             ls /usr/lib/llvm-*/lib/clang/
             echo "!!!!!!!!!!!!!!!!!!!!!!!!below looking for lib path!!!!!!!!!"
             find /usr/lib -name "libclang_rt.profile-x86_64.a"
-            find / -name "libclang_rt.profile-x86_64.a" 2>/dev/null
             echo "!!!!!!!!!!!!!!!!!!!!!!!!above looking for lib path!!!!!!!!!"
+            export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             export PATH=/opt/cmake/bin:$PATH
             cmake -B build -S . -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
-            export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
-            which cmake
-            cmake --version
             echo "below is verbose build fail message"
             cmake --build build -v
       - run:
