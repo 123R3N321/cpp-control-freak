@@ -86,7 +86,7 @@ jobs:
       - run:
           name: Build # check existence of any llvm lib
           command: |
-            sudo apt install llvm-18 clang-18
+            apt install llvm-18 clang-18
             echo "llvm any version check"
             ls /usr/lib/llvm-*/lib/clang/
             export PATH=/opt/cmake/bin:$PATH
