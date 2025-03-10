@@ -120,7 +120,8 @@ jobs:
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
-            cd - # force to absolute root dir
+            echo "!!!!!!!!!!!!!!!!!!1check current dir"
+            pwd
             gcovr -r . --html --html-details -o coverage.html --verbose
             cat coverage.html
       - store_artifacts:
