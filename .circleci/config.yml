@@ -71,11 +71,11 @@ jobs:
             set -x  # Enable debugging
             pwd && ls
             source ./setup_vcpkg.sh
+            export PATH=/opt/cmake/bin:$PATH
             cmake -B build -S . --preset debug --DENABLE_COVERAGE=ON
       # - run:
       #     name: Configure CMake
       #     command: |
-      #       export PATH=/opt/cmake/bin:$PATH
       # - run:
       #     name: Build
       #     command: |
