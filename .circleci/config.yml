@@ -66,29 +66,25 @@ jobs:
           command: |
             tar --version
       - run:
-          name: Setup vcpkg with debug logs and build
+          name: Setup vcpkg with debug logs
           command: |
             set -x  # Enable debugging
-            pwd && ls
             source ./setup_vcpkg.sh
+      - run:
+          name: Configure CMake
+          command: |
+      - run:
+          name: Build
+          command: |
+            apt install llvm-18 clang-18
+            apt install libclang-rt-18-dev -y
+            ls /usr/lib/llvm-*/lib/clang/
+            export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             export PATH=/opt/cmake/bin:$PATH
-            cmake -B build --preset debug -DENABLE_COVERAGE=ON
+            cmake -B build -S . --preset debug -DENABLE_COVERAGE=ON \
+                -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
+            echo "below is verbose build fail message"
             cmake --build build -v
-      # - run:
-      #     name: Configure CMake
-      #     command: |
-      # - run:
-      #     name: Build
-      #     command: |
-      #       # why all this?
-      #       apt install llvm-18 clang-18
-      #       apt install libclang-rt-18-dev -y
-      #       ls /usr/lib/llvm-*/lib/clang/
-      #       export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
-      #       export PATH=/opt/cmake/bin:$PATH
-      #       cmake -B build -S . -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
-      #       echo "below is verbose build fail message"
-      #       cmake --build build -v
       - run:
           name: Run tests
           command: |
