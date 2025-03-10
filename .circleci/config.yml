@@ -84,15 +84,11 @@ jobs:
             export PATH=/opt/cmake/bin:$PATH
             cmake -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_CXX_COMPILER=clang++
       - run:
-          name: Build # check existence of any llvm lib
+          name: Build
           command: |
             apt install llvm-18 clang-18
             apt install libclang-rt-18-dev -y
-            echo "llvm any version check"
             ls /usr/lib/llvm-*/lib/clang/
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!below looking for lib path!!!!!!!!!"
-            find /usr/lib -name "libclang_rt.profile-x86_64.a"
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!above looking for lib path!!!!!!!!!"
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             export PATH=/opt/cmake/bin:$PATH
             cmake -B build -S . -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
@@ -124,8 +120,8 @@ jobs:
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
-            cd .. # get back out from build
-            gcovr -r . --html --html-details -o coverage.html
+            cd - # force to absolute root dir
+            gcovr -r . --html --html-details -o coverage.html --verbose
             cat coverage.html
       - store_artifacts:
           path: coverage.html
