@@ -89,6 +89,8 @@ jobs:
             apt install llvm-18 clang-18
             echo "llvm any version check"
             ls /usr/lib/llvm-*/lib/clang/
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!1looking for lib path!!!!!!!!!"
+            find /usr/lib -name "libclang_rt.profile-x86_64.a"
             export PATH=/opt/cmake/bin:$PATH
             cmake -B build -S . -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
