@@ -82,19 +82,20 @@ jobs:
           name: Configure CMake
           command: |
             export PATH=/opt/cmake/bin:$PATH
-            which cmake
-            cmake --version
             cmake -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_CXX_COMPILER=clang++
       - run:
           name: Build # check existence of any llvm lib
           command: |
+            sudo apt install llvm-18 clang-18
+            echo "llvm any version check"
             ls /usr/lib/llvm-*/lib/clang/
             export PATH=/opt/cmake/bin:$PATH
             cmake -B build -S . -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             which cmake
             cmake --version
-            cmake --build build
+            echo "below is verbose build fail message"
+            cmake --build build -v
       - run:
           name: Run tests
           command: |
