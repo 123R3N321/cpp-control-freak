@@ -69,7 +69,8 @@ jobs:
           name: Setup vcpkg with debug logs
           command: |
             set -x  # Enable debugging
-            source ./setup-vcpkg
+            pwd && ls
+            source ./setup-vcpkg.sh
       - run:
           name: Configure CMake
           command: |
