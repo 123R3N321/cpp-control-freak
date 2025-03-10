@@ -72,7 +72,7 @@ jobs:
             pwd && ls
             source ./setup_vcpkg.sh
             export PATH=/opt/cmake/bin:$PATH
-            cmake -B build -DENABLE_COVERAGE=ON
+            cmake -B build --preset debug -DENABLE_COVERAGE=ON
       # - run:
       #     name: Configure CMake
       #     command: |
