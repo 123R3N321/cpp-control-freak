@@ -112,6 +112,7 @@ jobs:
           command: |  # shouldn't need to run tests again.
             echo "!!!!!!!!!!!!!!!!!!1check current dir"
             pwd
+            cd build
             make coverage
             lcov --capture --directory . --output-file coverage.info --ignore-errors inconsistent
             genhtml coverage.info --output-directory coverage_report
