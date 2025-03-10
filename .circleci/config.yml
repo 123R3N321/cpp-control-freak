@@ -84,6 +84,11 @@ jobs:
               -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             echo "below is verbose build fail message"
             cmake --build build -v
+            # testing
+            which llvm-cov
+            llvm-cov --version
+            which gcov
+            gcov --version
       - run:
           name: Run tests
           command: |
@@ -115,7 +120,7 @@ jobs:
             cd build
             make coverage
             lcov --capture --directory . --output-file coverage.info --ignore-errors inconsistent
-            genhtml coverage.info --output-directory coverage_report
+            genhtml coverage.info --output-directory coverage_report 
       - store_artifacts:
           path: coverage_report
           destination: coverage
