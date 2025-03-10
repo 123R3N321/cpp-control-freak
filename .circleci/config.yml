@@ -66,13 +66,13 @@ jobs:
           command: |
             tar --version
       - run:
-          name: Setup vcpkg with debug logs
+          name: Setup vcpkg with debug logs and build
           command: |
             set -x  # Enable debugging
             pwd && ls
             source ./setup_vcpkg.sh
             export PATH=/opt/cmake/bin:$PATH
-            cmake -B build -S . --preset debug --DENABLE_COVERAGE=ON
+            cmake -B build -DENABLE_COVERAGE=ON
       # - run:
       #     name: Configure CMake
       #     command: |
