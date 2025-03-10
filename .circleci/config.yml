@@ -70,7 +70,7 @@ jobs:
           command: |
             set -x  # Enable debugging
             pwd && ls
-            source ./setup-vcpkg.sh
+            source ./setup_vcpkg.sh
       - run:
           name: Configure CMake
           command: |
