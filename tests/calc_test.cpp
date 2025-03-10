@@ -1,8 +1,8 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock.h>
-#include "../src/calculator.hpp"
-#include "../src/logger.hpp"
-#include "../src/notifier.hpp"
+#include "calculator/calculator.hpp"
+#include "logger/logger.hpp"
+#include "notifier/notifier.hpp"
 
 
 class MockNotifier : public Notifier {

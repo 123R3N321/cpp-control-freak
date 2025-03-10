@@ -1,4 +1,4 @@
-#include "notifier.hpp"
+#include "notifier/notifier.hpp"
 #include <iostream>
 
 Notifier::Notifier(double threshold) : threshold(threshold) {}

@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/calculator.hpp"
+#include "calculator/calculator.hpp"
 #include <fstream>
 #include <sstream>
 

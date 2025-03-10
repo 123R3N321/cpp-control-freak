@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/notifier.hpp"
+#include "notifier/notifier.hpp"
 
 // Mock Notifier class for testing alert functionality
 

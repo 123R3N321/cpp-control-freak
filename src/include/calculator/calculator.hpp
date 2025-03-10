@@ -1,8 +1,8 @@
 #ifndef CALCULATOR_HPP
 #define CALCULATOR_HPP
 
-#include "logger.hpp"
-#include "notifier.hpp"
+#include "logger/logger.hpp"
+#include "notifier/notifier.hpp"
 
 class Calculator {
 private:
