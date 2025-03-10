@@ -50,7 +50,8 @@ jobs:
               python3 \
               pkg-config \
               tzdata \
-              wget
+              wget \
+              clang-18 llvm-18-dev libclang-18-dev
             CMAKE_VERSION=3.31.5
             CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
             wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}
@@ -88,6 +89,7 @@ jobs:
           name: Build
           command: |
             export PATH=/opt/cmake/bin:$PATH
+            export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             which cmake
             cmake --version
             cmake --build build
