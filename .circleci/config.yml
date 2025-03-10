@@ -73,6 +73,7 @@ jobs:
             source ./setup_vcpkg.sh
             export PATH=/opt/cmake/bin:$PATH
             cmake -B build --preset debug -DENABLE_COVERAGE=ON
+            cmake --build build -v
       # - run:
       #     name: Configure CMake
       #     command: |
