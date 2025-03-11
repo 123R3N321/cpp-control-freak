@@ -118,10 +118,10 @@ jobs:
             llvm-cov-18 gcov tests/CMakeFiles/calculator_test.dir/calc_test.cpp.gcda
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov clean up command github"
+            export LLVM_COV_TOOL=$(which llvm-cov-18)
             lcov --capture --directory tests --output-file coverage.info \
             --ignore-errors inconsistent \
-            --gcov-tool $(which llvm-cov-18)
-            lcov --remove coverage.info '/usr/include/*' '/root/project/vcpkg/installed/*' --output-file coverage_filtered.info
+            --gcov-tool "$LLVM_COV_TOOL gcov"
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!next, try genhtml"
             genhtml coverage.info --output-directory coverage_report
 
