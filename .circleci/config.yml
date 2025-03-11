@@ -114,6 +114,10 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             export PATH=/opt/cmake/bin:$PATH
+            rm -rf build
+            mkdir build && cd build
+            CXX=g++ cmake ..
+            make
             cmake -B build -DENABLE_COVERAGE=ON
             cmake --build build
             cd build
