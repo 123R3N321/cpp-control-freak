@@ -86,7 +86,7 @@ jobs:
             cmake --build build -v
             # testing
             which llvm-cov
-            llvm-cov --version
+            llvm-cov-18 --version
             which gcov
             gcov --version
       - run:
