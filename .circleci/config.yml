@@ -113,7 +113,6 @@ jobs:
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
-            apt-get install gcov-4.8
             cd build
             make coverage
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
