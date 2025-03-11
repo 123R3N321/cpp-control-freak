@@ -26,10 +26,10 @@ double Calculator::multiply(double a, double b) {
 
 double Calculator::divide(double a, double b) {
     if (b == 0) {
-        logger.logOperation("Division", a, b, -1);  // Log error for division by zero
+        logger.logOperation("Division", a, b, -1);// Log error for division by zero
         notifier.sendAlert(-1);
         std::cout << "Error: Division by zero" << std::endl;
-        return -1;  // Returning -1 as an error code for division by zero
+        return -1;// Returning -1 as an error code for division by zero
     }
     double result = a / b;
     logger.logOperation("Division", a, b, result);
