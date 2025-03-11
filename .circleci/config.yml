@@ -113,7 +113,8 @@ jobs:
             cd build
             make coverage
             lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool $(which llvm-cov-18)
-            genhtml coverage.info --output-directory coverage_report 
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
+#            genhtml coverage.info --output-directory coverage_report
       - store_artifacts:
           path: coverage_report
           destination: coverage
