@@ -30,3 +30,48 @@
 *.exe
 *.out
 *.app
+
+# idea specific ignore
+.idea/
+build/
+
+# VSCode config dir
+.vscode/
+
+# Mac stuff
+.DS_Store
+
+
+# Ignore all compiled executables (chatgpt generated)
+*.[oa]
+# object files
+
+*.out
+# output binaries
+
+*.exe
+# executables (Windows)
+
+*.so
+# shared libraries
+
+*.dylib
+# macOS dynamic libraries
+
+*.dll
+# Windows DLLs
+
+main
+
+
+# vcpkg
+vcpkg_installed
+vcpkg
+vcpkg-configuration.json
+
+*.cmake
+CMakeFiles
+cpp-control-freak
+CMakeUserPresets.json
+Makefile
+coverage_report

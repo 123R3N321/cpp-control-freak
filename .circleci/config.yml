@@ -1,0 +1,138 @@
+version: 2.1
+
+executors:
+  cpp-executor:
+    docker:
+      - image: ubuntu:latest
+    environment:
+      CC: clang
+      CXX: clang++
+      PATH: "/usr/local/bin:/usr/bin:/bin"
+      DEBIAN_FRONTEND: noninteractive  # Ensures non-interactive installation
+      TEST_RESULTS: /tmp/test-results
+
+jobs:
+  build_and_test:
+    executor: cpp-executor
+    steps:
+      - checkout
+      - run:
+          name: Fix CA Certificates
+          command: |
+            apt update && apt install -y --no-install-recommends ca-certificates
+            if command -v update-ca-certificates > /dev/null; then
+              update-ca-certificates
+            fi
+      - run:
+          name: Set timezone to UTC
+          command: |
+            ln -fs /usr/share/zoneinfo/UTC /etc/localtime
+            echo "tzdata tzdata/Areas select Etc" | debconf-set-selections
+            echo "tzdata tzdata/Zones/Etc select UTC" | debconf-set-selections
+      - run:
+          name: Install dependencies
+          command: |
+            apt update && apt install -y --no-install-recommends \
+              build-essential \
+              libtool \
+              autoconf \
+              clang \
+              clang-tidy \
+              clang-format \
+              lcov \
+              ninja-build \
+              curl \
+              zip \
+              unzip \
+              tar \
+              git \
+              python3 \
+              python3-pip \
+              pkg-config \
+              tzdata \
+              wget \
+              gcovr \
+              clang-18 llvm-18-dev libclang-18-dev
+            CMAKE_VERSION=3.31.5
+            CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
+            wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/${CMAKE_TAR}
+            tar -xzvf ${CMAKE_TAR}
+            mv cmake-${CMAKE_VERSION}-linux-x86_64 /opt/cmake
+            export PATH=/opt/cmake/bin:$PATH
+            which cmake
+            cmake --version
+#            apt install python3-gcovr
+
+
+      - run:
+          name: Verify tar installation
+          command: |
+            tar --version
+      - run:
+          name: Setup vcpkg with debug logs
+          command: |
+            set -x  # Enable debugging
+            source ./setup_vcpkg.sh
+      - run:
+          name: Build
+          command: |
+            apt install llvm-18 clang-18
+            apt install libclang-rt-18-dev -y
+            ls /usr/lib/llvm-*/lib/clang/
+            export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
+            export PATH=/opt/cmake/bin:$PATH
+            export VCPKG_ROOT=/root/project/vcpkg
+            export PATH=$VCPKG_ROOT:$PATH
+            cmake -B build -S . --preset debug -DENABLE_COVERAGE=ON \
+              -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
+            echo "below is verbose build fail message"
+            cmake --build build -v
+      - run:
+          name: Run tests
+          command: |
+            export PATH=/opt/cmake/bin:$PATH
+            which cmake
+            cmake --version
+            export GTEST_OUTPUT=xml:${TEST_RESULTS}/
+            mkdir -p $TEST_RESULTS
+            ctest --test-dir build --output-on-failure
+      - store_test_results:
+          path: /tmp/test-results
+      - run:
+          name: Run Clang-Format
+          command: |
+            find src/ -type f \( -name "*.cpp" -o -name "*.h" \) | xargs clang-format --dry-run --Werror main.cpp
+
+      - run:
+          name: Run Clang-Tidy with Compilation Database
+          command: |
+            export PATH=/opt/cmake/bin:$PATH
+            cd build
+            cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES ..
+            run-clang-tidy -p .
+      - run:
+          name: Generate Coverage
+          command: |  # shouldn't need to run tests again.
+            export PATH=/opt/cmake/bin:$PATH
+            rm -rf build
+            mkdir build && cd build
+            CXX=g++ cmake ..
+            make
+            cmake -B build -DENABLE_COVERAGE=ON
+            cmake --build build
+            cd build
+            ctest
+            make coverage
+            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent
+            genhtml coverage.info --output-directory coverage_report
+
+      - store_artifacts:
+          path: coverage_report
+          destination: coverage
+
+
+workflows:
+  version: 2
+  cpp_pipeline:
+    jobs:
+      - build_and_test
