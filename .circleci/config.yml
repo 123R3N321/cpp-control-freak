@@ -51,6 +51,7 @@ jobs:
               pkg-config \
               tzdata \
               wget \
+              gcovr \
               clang-18 llvm-18-dev libclang-18-dev
             CMAKE_VERSION=3.31.5
             CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
@@ -121,7 +122,7 @@ jobs:
             export LLVM_COV_TOOL=$(which llvm-cov-18)
             lcov --capture --directory tests --output-file coverage.info \
             --ignore-errors inconsistent \
-            --gcov-tool "$LLVM_COV_TOOL gcov"
+            --gcov-tool gcov
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!next, try genhtml"
             genhtml coverage.info --output-directory coverage_report
 
