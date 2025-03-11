@@ -98,7 +98,7 @@ jobs:
       - run:
           name: Run Clang-Format
           command: |
-            clang-format --dry-run --Werror $(find Components/ -type f \( -name "*.cpp" -o -name "*.h" \) ! -path "Components/calculator.cpp") main.cpp
+            find src/ -type f \( -name "*.cpp" -o -name "*.h" \) | xargs clang-format --dry-run --Werror main.cpp
 
       - run:
           name: Run Clang-Tidy with Compilation Database
