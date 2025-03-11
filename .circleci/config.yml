@@ -115,29 +115,13 @@ jobs:
           command: |  # shouldn't need to run tests again.
             cd build
             make coverage
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
             llvm-cov-18 gcov tests/CMakeFiles/calculator_test.dir/calc_test.cpp.gcda
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov clean up command github"
             export LLVM_COV_TOOL=$(which llvm-cov-18)
             lcov --capture --directory build --output-file coverage.info \
             --ignore-errors inconsistent \
             --gcov-tool gcov --ignore-errors version --ignore-errors gcov
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!next, try genhtml"
-            genhtml coverage.info --output-directory coverage_report --ignore-errors empty
+#            genhtml coverage.info --output-directory coverage_report --ignore-errors empty
 
-      #            gcov ../src/calculator.cpp
-#            mkdir lcov-report
-#            lcov --capture --directory . --output-file lcov-report/coverage.info
-#            genhtml lcov-report/coverage.info --output-directory lcov-report
-#            gcov ../src/calculator.cpp
-#            mkdir gcovr-report
-#            gcovr --root . --html --html-details --output gcovr-report/coverage.html
-#            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command from random github"
-#            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool "$(which llvm-cov-18) gcov"
-#            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
-#            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool $(which llvm-cov-18)
-#            genhtml coverage.info --output-directory coverage_report
       - store_artifacts:
           path: coverage_report
           destination: coverage
