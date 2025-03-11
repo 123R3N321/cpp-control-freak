@@ -113,14 +113,13 @@ jobs:
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
+            cmake -B build -DENABLE_COVERAGE=ON
+            cmake --build build
             cd build
+            ctest
             make coverage
-            llvm-cov-18 gcov tests/CMakeFiles/calculator_test.dir/calc_test.cpp.gcda
-            export LLVM_COV_TOOL=$(which llvm-cov-18)
-            lcov --capture --directory build --output-file coverage.info \
-            --ignore-errors inconsistent \
-            --gcov-tool gcov --ignore-errors version --ignore-errors gcov
-#            genhtml coverage.info --output-directory coverage_report --ignore-errors empty
+            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent
+            genhtml coverage.info --output-directory coverage_report
 
       - store_artifacts:
           path: coverage_report
