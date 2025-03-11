@@ -39,7 +39,6 @@ jobs:
               clang \
               clang-tidy \
               clang-format \
-              gcovr \
               lcov \
               ninja-build \
               curl \
@@ -67,22 +66,10 @@ jobs:
           command: |
             tar --version
       - run:
-          name: Install vcpkg with debug logs
+          name: Setup vcpkg with debug logs
           command: |
             set -x  # Enable debugging
-            git clone https://github.com/microsoft/vcpkg.git
-            ls -lah vcpkg  # Ensure vcpkg directory exists
-            cat vcpkg/bootstrap-vcpkg.sh | head -n 40  # Show first 40 lines of the script for inspection
-            ./vcpkg/bootstrap-vcpkg.sh || (echo "vcpkg bootstrap failed!" && exit 1)
-      - run:
-          name: Install project dependencies
-          command: |
-            ./vcpkg/vcpkg install gtest
-      - run:
-          name: Configure CMake
-          command: |
-            export PATH=/opt/cmake/bin:$PATH
-            cmake -B build -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake -DCMAKE_CXX_COMPILER=clang++
+            source ./setup_vcpkg.sh
       - run:
           name: Build
           command: |
@@ -91,7 +78,15 @@ jobs:
             ls /usr/lib/llvm-*/lib/clang/
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
             export PATH=/opt/cmake/bin:$PATH
-            cmake -B build -S . -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
+            export VCPKG_ROOT=/root/project/vcpkg
+            export PATH=$VCPKG_ROOT:$PATH
+            # testing
+            which gcov
+            gcov --version
+            which llvm-cov-18
+            llvm-cov-18 --version
+            cmake -B build -S . --preset debug -DENABLE_COVERAGE=ON \
+              -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             echo "below is verbose build fail message"
             cmake --build build -v
       - run:
@@ -122,10 +117,12 @@ jobs:
           command: |  # shouldn't need to run tests again.
             echo "!!!!!!!!!!!!!!!!!!1check current dir"
             pwd
-            gcovr -r . --html --html-details -o coverage.html --verbose
-            cat coverage.html
+            cd build
+            make coverage
+            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool $(which llvm-cov-18)
+            genhtml coverage.info --output-directory coverage_report 
       - store_artifacts:
-          path: coverage.html
+          path: coverage_report
           destination: coverage
 
 
