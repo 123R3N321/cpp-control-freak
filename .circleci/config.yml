@@ -111,9 +111,10 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             cd build
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
             make coverage
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
 #            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool $(which llvm-cov-18)
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test make coverage command"
 #            genhtml coverage.info --output-directory coverage_report
       - store_artifacts:
           path: coverage_report
