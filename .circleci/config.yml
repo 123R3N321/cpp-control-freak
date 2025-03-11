@@ -112,9 +112,13 @@ jobs:
           command: |  # shouldn't need to run tests again.
             cd build
             make coverage
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
-            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool "$(which llvm-cov-18) gcov"
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
+            make deps
+            make lcov-report
+            make gcovr-report
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command from random github"
+#            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool "$(which llvm-cov-18) gcov"
+#            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
 #            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool $(which llvm-cov-18)
 #            genhtml coverage.info --output-directory coverage_report
       - store_artifacts:
