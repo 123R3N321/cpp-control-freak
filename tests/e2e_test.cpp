@@ -1,12 +1,12 @@
-#include "gtest/gtest.h"
 #include "calculator/calculator.hpp"
+#include "gtest/gtest.h"
 #include <fstream>
 #include <sstream>
 
 class E2ETest : public ::testing::Test {
 protected:
     Logger logger;
-    Notifier notifier{10}; // Set threshold to 10
+    Notifier notifier{10};// Set threshold to 10
     Calculator calculator{logger, notifier};
 
     std::string captureLog() {
@@ -34,4 +34,3 @@ TEST_F(E2ETest, AddTest) {
     std::string captured_output = testing::internal::GetCapturedStdout();
     EXPECT_FALSE(captured_output.empty());
 }
-

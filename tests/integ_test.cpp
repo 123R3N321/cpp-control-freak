@@ -1,16 +1,16 @@
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "calculator/calculator.hpp"
-#include "notifier/notifier.hpp"
 #include "logger/logger.hpp"
+#include "notifier/notifier.hpp"
 #include <fstream>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 #include <sstream>
 
 
 class MockNotifier : public Notifier {
 public:
     MockNotifier(int threshold) : Notifier(threshold) {}
-    MOCK_METHOD(void, sendAlert, (double));
+    MOCK_METHOD(void, sendAlert, (double) );
 };
 
 class IntegTest : public ::testing::Test {
@@ -28,7 +28,7 @@ protected:
 };
 
 TEST_F(IntegTest, LogOperationTest) {
-    // Calculate an operation and verify if it's correctly written to the log file    
+    // Calculate an operation and verify if it's correctly written to the log file
     int result = calculator.add(2, 6);
     std::string logContent = captureLog();
 

@@ -47,3 +47,9 @@ this makes a directory called coverage_report, then under v1 there are a bunch o
 ## CircleCI
 
 All pushes to the remote will trigger a pipeline run on CircleCI which builds and tests the code. However, the coverage report is not currently building in the pipeline.
+
+
+Run to fix all code to match the .clang-format requirements:
+```bash
+find . -name "*.cpp" -o -name "*.h" | xargs clang-format -i
+```
