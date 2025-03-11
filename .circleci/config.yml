@@ -47,6 +47,7 @@ jobs:
               tar \
               git \
               python3 \
+              python3-pip \
               pkg-config \
               tzdata \
               wget \
