@@ -80,11 +80,6 @@ jobs:
             export PATH=/opt/cmake/bin:$PATH
             export VCPKG_ROOT=/root/project/vcpkg
             export PATH=$VCPKG_ROOT:$PATH
-            # testing
-            which gcov
-            gcov --version
-            which llvm-cov-18
-            llvm-cov-18 --version
             cmake -B build -S . --preset debug -DENABLE_COVERAGE=ON \
               -DCMAKE_CXX_FLAGS="-L/usr/lib/llvm-18/lib/clang/18/lib/linux/"
             echo "below is verbose build fail message"
@@ -115,8 +110,6 @@ jobs:
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
-            echo "!!!!!!!!!!!!!!!!!!1check current dir"
-            pwd
             cd build
             make coverage
             lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool $(which llvm-cov-18)
