@@ -122,7 +122,7 @@ jobs:
             export LLVM_COV_TOOL=$(which llvm-cov-18)
             lcov --capture --directory build --output-file coverage.info \
             --ignore-errors inconsistent \
-            --gcov-tool gcov --ignore-errors version
+            --gcov-tool gcov --ignore-errors version --ignore-errors gcov
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!next, try genhtml"
             genhtml coverage.info --output-directory coverage_report --ignore-errors empty
 
