@@ -115,11 +115,11 @@ jobs:
             cd build
             make coverage
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
-            coverage
+            gcov ../src/calculator.cpp
             mkdir lcov-report
             lcov --capture --directory . --output-file lcov-report/coverage.info
             genhtml lcov-report/coverage.info --output-directory lcov-report
-            coverage
+            gcov ../src/calculator.cpp
             mkdir gcovr-report
             gcovr --root . --html --html-details --output gcovr-report/coverage.html
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command from random github"
