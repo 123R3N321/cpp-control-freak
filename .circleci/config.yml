@@ -115,14 +115,16 @@ jobs:
             cd build
             make coverage
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
-            gcov ../src/calculator.cpp
-            mkdir lcov-report
-            lcov --capture --directory . --output-file lcov-report/coverage.info
-            genhtml lcov-report/coverage.info --output-directory lcov-report
-            gcov ../src/calculator.cpp
-            mkdir gcovr-report
-            gcovr --root . --html --html-details --output gcovr-report/coverage.html
-            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command from random github"
+            llvm-cov-18 gcov tests/CMakeFiles/calculator_test.dir/calc_test.cpp.gcda
+            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
+      #            gcov ../src/calculator.cpp
+#            mkdir lcov-report
+#            lcov --capture --directory . --output-file lcov-report/coverage.info
+#            genhtml lcov-report/coverage.info --output-directory lcov-report
+#            gcov ../src/calculator.cpp
+#            mkdir gcovr-report
+#            gcovr --root . --html --html-details --output gcovr-report/coverage.html
+#            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command from random github"
 #            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool "$(which llvm-cov-18) gcov"
 #            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
 #            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool $(which llvm-cov-18)
