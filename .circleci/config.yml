@@ -59,6 +59,7 @@ jobs:
             export PATH=/opt/cmake/bin:$PATH
             which cmake
             cmake --version
+            pip install gcovr
 
 
       - run:
@@ -113,9 +114,13 @@ jobs:
             cd build
             make coverage
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
-            make deps
-            make lcov-report
-            make gcovr-report
+            coverage
+            mkdir lcov-report
+            lcov --capture --directory . --output-file lcov-report/coverage.info
+            genhtml lcov-report/coverage.info --output-directory lcov-report
+            coverage
+            mkdir gcovr-report
+            gcovr --root . --html --html-details --output gcovr-report/coverage.html
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command from random github"
 #            lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent --gcov-tool "$(which llvm-cov-18) gcov"
 #            echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command"
