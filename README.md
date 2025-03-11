@@ -10,21 +10,21 @@ dictates that we set up the basics first
 | vcpkg          | :white_check_mark: |
 | ClangFormat    | :white_check_mark: |
 | ClangTidy      | :white_check_mark: |
-| gcov           | Ren is on it!     |
+| gcov           | :large_orange_diamond:     |
 | CircleCI       | :white_check_mark: |
 
 ## Message to my dear, dear teammates:
  Ren: I am running this using Clion IDE on a Ubuntu machine, careful if you are on Mac/VSCode!
 
- How to setup:
+## How to setup:
 
- run 
+run 
 ```bash
-./setup_vcpkg.sh
+source ./setup_vcpkg.sh
 ```
-to clone vcpkg, install gtest and put it in your local repository
+to clone vcpkg, install gtest and put it in your local repository, and set environment variables for the session.
 
-to build and run:
+To build and run:
 ```bash
 cmake -B build -S . --preset debug
 cmake --build build
@@ -32,14 +32,18 @@ cd build && ctest
 cd -
 ```
 
-for coverage in html run:
+To generate coverage in html run:
 ```bash
 cmake -B build -DENABLE_COVERAGE=ON
 cmake --build build
 cd build
 ctest
 make coverage
-lcov --capture --directory . --output-file coverage.info --ignore-errors inconsistent
+lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent
 genhtml coverage.info --output-directory coverage_report
 ```
 this makes a directory called coverage_report, then under v1 there are a bunch of html files to readily see cov
+
+## CircleCI
+
+All pushes to the remote will trigger a pipeline run on CircleCI which builds and tests the code. However, the coverage report is not currently building in the pipeline.
