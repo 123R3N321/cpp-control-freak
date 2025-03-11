@@ -113,7 +113,6 @@ jobs:
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
-            apt-get install gcc-4.8 g++-4.8
             apt-get install gcov-4.8
             cd build
             make coverage
