@@ -119,9 +119,12 @@ jobs:
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov clean up command github"
             lcov --capture --directory tests --output-file coverage.info \
-                 --ignore-errors inconsistent \
-                 --gcov-tool $(which llvm-cov-18) \
-                 --remove coverage.info '/usr/include/*' '/root/project/vcpkg/installed/*'
+            --ignore-errors inconsistent \
+            --gcov-tool $(which llvm-cov-18)
+
+  # Step 2: Remove unwanted files
+            lcov --remove coverage.info '/usr/include/*' '/root/project/vcpkg/installed/*' --output-file coverage_filtered.info
+
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!next, try genhtml"
             genhtml coverage.info --output-directory coverage_report
 
