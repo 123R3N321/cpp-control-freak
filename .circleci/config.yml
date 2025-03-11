@@ -124,7 +124,7 @@ jobs:
             --ignore-errors inconsistent \
             --gcov-tool gcov --ignore-errors version
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!next, try genhtml"
-            genhtml coverage.info --output-directory coverage_report
+            genhtml coverage.info --output-directory coverage_report --ignore-errors empty
 
       #            gcov ../src/calculator.cpp
 #            mkdir lcov-report
