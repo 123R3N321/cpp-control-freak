@@ -120,7 +120,7 @@ jobs:
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov command github"
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!test lcov clean up command github"
             export LLVM_COV_TOOL=$(which llvm-cov-18)
-            lcov --capture --directory tests --output-file coverage.info \
+            lcov --capture --directory build --output-file coverage.info \
             --ignore-errors inconsistent \
             --gcov-tool gcov --ignore-errors version
             echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!next, try genhtml"
