@@ -60,7 +60,7 @@ jobs:
             export PATH=/opt/cmake/bin:$PATH
             which cmake
             cmake --version
-            pip install gcovr
+            apt install python3-gcovr
 
 
       - run:
