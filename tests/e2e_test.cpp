@@ -21,8 +21,8 @@ TEST_F(E2ETest, AddTest) {
     testing::internal::CaptureStdout();
 
     // verify addition
-    int result = calculator.add(10, 5);
-    EXPECT_DOUBLE_EQ(result, 15);
+    int result = calculator.add(2, 6);
+    EXPECT_DOUBLE_EQ(result, 8);
 
     // verify log output
     std::string logContent = captureLog();
