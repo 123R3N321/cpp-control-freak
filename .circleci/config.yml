@@ -76,7 +76,7 @@ jobs:
       - run:
           name: Build
           command: |
-            apt install llvm-18 clang-18
+            apt install llvm-18 
             apt install libclang-rt-18-dev -y
             ls /usr/lib/llvm-*/lib/clang/
             export LIBRARY_PATH=/usr/lib/llvm-18/lib/clang/18/lib/linux:$LIBRARY_PATH
