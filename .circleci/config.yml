@@ -61,7 +61,7 @@ jobs:
             export PATH=/opt/cmake/bin:$PATH
             which cmake
             cmake --version
-            sudo apt-get install gcc-4.8 g++-4.8
+            apt-get install gcc-4.8 g++-4.8
 #            apt install python3-gcovr
 
 
