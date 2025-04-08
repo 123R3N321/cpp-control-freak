@@ -114,7 +114,7 @@ jobs:
 
 
       - store_artifacts:
-          path: coverage_report
+          path: build/coverage_report
           destination: coverage
 
 
