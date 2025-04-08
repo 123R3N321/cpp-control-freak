@@ -109,7 +109,7 @@ jobs:
               llvm-cov show ./unit_tests -instr-profile=coverage.profdata --format=html -output-dir=coverage_report
             elif [ -f "*.gcda" ] || [ -f "*.gcno" ]; then
               lcov --capture --directory . --output-file coverage.info
-              genhtml coverage.info --output-directory coverage_html
+              genhtml coverage.info --output-directory coverage_report
             fi
 
 

@@ -5,24 +5,20 @@ project(cpp-control-freak)
 enable_testing()
 find_package(GTest CONFIG REQUIRED)
 
+# setting gcov coverage
+option(ENABLE_COVERAGE "Enable coverage reporting" ON)
+
 # Enable coverage options
 if(ENABLE_COVERAGE)
-    add_compile_options(--coverage)
-    add_link_options(--coverage)
+  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
 endif()
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_CXX_COMPILER clang++) #this enforces compiler choice clang
-
-# setting gcov coverage
-option(ENABLE_COVERAGE "Enable coverage reporting" ON)
-
-if(ENABLE_COVERAGE)
-  message(STATUS "Coverage enabled")
-  add_compile_options(--coverage -O0 -g -fprofile-arcs -ftest-coverage)
-  add_link_options(--coverage)
-endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
 
