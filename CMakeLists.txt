@@ -5,19 +5,6 @@ project(cpp-control-freak)
 enable_testing()
 find_package(GTest CONFIG REQUIRED)
 
-# Check if GCC 4.8 or desired version is available
-find_program(GCC_BIN gcc-4.8)
-find_program(GCOV_BIN gcov-4.8)
-
-if(GCC_BIN AND GCOV_BIN)
-    set(CMAKE_C_COMPILER ${GCC_BIN})
-    set(CMAKE_CXX_COMPILER ${GCC_BIN})
-    set(GCOV_PATH ${GCOV_BIN})
-    message(STATUS "Using GCC 4.8 and gcov-4.8 for coverage")
-else()
-    message(FATAL_ERROR "GCC 4.8 and gcov-4.8 not found! Ensure they are installed.")
-endif()
-
 # Enable coverage options
 if(ENABLE_COVERAGE)
     add_compile_options(--coverage)
