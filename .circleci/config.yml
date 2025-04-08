@@ -103,7 +103,7 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             cd build
-            geninfo . --output-filename coverage.info --memory 0 --ignore-errors version
+            geninfo --ignore-errors lcov --capture --directory . --output-file coverage.info
             genhtml coverage.info --output-directory coverage_report
 
 
