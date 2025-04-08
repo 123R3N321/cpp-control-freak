@@ -14,7 +14,9 @@ if(ENABLE_COVERAGE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping")
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+  endif()
 endif()
+
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_C_COMPILER clang)
