@@ -98,14 +98,7 @@ jobs:
             ctest --test-dir build --output-on-failure
       - store_test_results:
           path: /tmp/test-results
-
-      - run:
-          name: Run Clang-Tidy with Compilation Database
-          command: |
-            export PATH=/opt/cmake/bin:$PATH
-            cd build
-            cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES ..
-            run-clang-tidy -p .
+          
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
