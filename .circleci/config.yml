@@ -101,8 +101,9 @@ jobs:
       - run:
           name: Run Clang-Format
           command: |
-            FILES=$(find . \( -path ./vcpkg -o -path ./build \) -prune -o \( -name '*.cpp' -o -name '*.h' \) -type f)
+            FILES=$(find . \( -path ./vcpkg -o -path ./build \) -prune -o \( -name '*.cpp' -o -name '*.h' \) -type f -print)
             clang-format --dry-run --Werror -style=file $FILES
+
 
       - run:
           name: Run Clang-Tidy with Compilation Database
