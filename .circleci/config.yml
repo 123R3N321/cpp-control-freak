@@ -123,6 +123,7 @@ jobs:
             cd build
             ctest
             make coverage
+            ls -al
             lcov --capture --directory tests --output-file coverage.info --ignore-errors inconsistent
             genhtml coverage.info --output-directory coverage_report
 
