@@ -61,8 +61,6 @@ jobs:
             export PATH=/opt/cmake/bin:$PATH
             which cmake
             cmake --version
-            apt-get install gcc-4.8 g++-4.8
-#            apt install python3-gcovr
 
 
       - run:
@@ -104,8 +102,15 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             cd build
-            lcov --capture --directory . --output-file coverage.info
-            genhtml coverage.info --output-directory coverage_report
+            mkdir -p coverage_html
+            if [ -f "*.profraw" ]; then
+              export LLVM_PROFILE_FILE="coverage-%p.profraw"
+              find . -name "*.profraw" -exec llvm-profdata merge --sparse {} -o coverage.profdata \;
+              llvm-cov show ./unit_tests -instr-profile=coverage.profdata --format=html -output-dir=coverage_html
+            elif [ -f "*.gcda" ] || [ -f "*.gcno" ]; then
+              lcov --capture --directory . --output-file coverage.info
+              genhtml coverage.info --output-directory coverage_html
+            fi
 
 
       - store_artifacts:
