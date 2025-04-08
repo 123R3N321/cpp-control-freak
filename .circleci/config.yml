@@ -101,7 +101,7 @@ jobs:
       - run:
           name: Run Clang-Format
           command: |
-            FILES=$(find src include -name '*.cpp' -o -name '*.h')
+            FILES=$(find . \( -name '*.cpp' -o -name '*.h' \) -type f)
             clang-format --dry-run --Werror -style=file $FILES
 
       - run:
