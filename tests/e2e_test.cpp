@@ -18,8 +18,6 @@ protected:
 };
 
 TEST_F(E2ETest, AddTest) {
-    testing::internal::CaptureStdout();
-
     // verify addition
     int result = calculator.add(2, 6);
     EXPECT_DOUBLE_EQ(result, 8);
@@ -31,6 +29,6 @@ TEST_F(E2ETest, AddTest) {
     EXPECT_NE(logContent.find("Result: 8"), std::string::npos);
 
     // verify notification
-    std::string captured_output = testing::internal::GetCapturedStdout();
-    EXPECT_FALSE(captured_output.empty());
+    bool thresholdCheck = notifier.sendAlert(result);
+    EXPECT_FALSE(thresholdCheck);
 }

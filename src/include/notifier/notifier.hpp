@@ -7,7 +7,7 @@ private:
 
 public:
     Notifier(double threshold);
-    void sendAlert(double result);
+    bool sendAlert(double result);
 };
 
 #endif
