@@ -98,6 +98,15 @@ jobs:
             ctest --test-dir build --output-on-failure
       - store_test_results:
           path: /tmp/test-results
+      
+      - run:
+          name: Install GCC 4.8 and gcov
+          command: |
+            apt-get update
+            apt-get install -y gcc-4.8 g++-4.8
+            ln -sf /usr/bin/gcc-4.8 /usr/bin/gcc
+            ln -sf /usr/bin/g++-4.8 /usr/bin/g++
+            ln -sf /usr/bin/gcov-4.8 /usr/bin/gcov
           
       - run:
           name: Generate Coverage
