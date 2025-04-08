@@ -101,7 +101,7 @@ jobs:
       - run:
           name: Run Clang-Format
           command: |
-            find src/ -type f \( -name "*.cpp" -o -name "*.h" \) | xargs clang-format --dry-run --Werror main.cpp
+            find . -regex '.*\.\(cpp\|hpp\|c\|h\)' -exec clang-format -i {} +
 
       - run:
           name: Run Clang-Tidy with Compilation Database
