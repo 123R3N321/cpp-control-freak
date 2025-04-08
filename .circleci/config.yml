@@ -101,7 +101,8 @@ jobs:
       - run:
           name: Run Clang-Format
           command: |
-            find . -regex '.*\.\(cpp\|hpp\|c\|h\)' -exec clang-format -i {} +
+            FILES=$(find src include -name '*.cpp' -o -name '*.h')
+            clang-format --dry-run --Werror -style=file $FILES
 
       - run:
           name: Run Clang-Tidy with Compilation Database
