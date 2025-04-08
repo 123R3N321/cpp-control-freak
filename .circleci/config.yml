@@ -98,12 +98,6 @@ jobs:
             ctest --test-dir build --output-on-failure
       - store_test_results:
           path: /tmp/test-results
-      - run:
-          name: Run Clang-Format
-          command: |
-            FILES=$(find . \( -path ./vcpkg -o -path ./build \) -prune -o \( -name '*.cpp' -o -name '*.h' \) -type f -print)
-            clang-format --dry-run -style=file -Wno-error $FILES
-
 
       - run:
           name: Run Clang-Tidy with Compilation Database
