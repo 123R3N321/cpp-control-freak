@@ -70,6 +70,7 @@ vcpkg
 vcpkg-configuration.json
 
 *.cmake
+cmake-build-debug
 CMakeFiles
 cpp-control-freak
 CMakeUserPresets.json
