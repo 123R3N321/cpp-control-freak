@@ -102,7 +102,7 @@ jobs:
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
-            cd build/tests
+            cd build
             ls -al
             echo "here"
             export LLVM_PROFILE_FILE="coverage-%p.profraw"
