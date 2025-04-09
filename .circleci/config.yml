@@ -104,14 +104,16 @@ jobs:
           command: |  # shouldn't need to run tests again.
             cd build
             export LLVM_PROFILE_FILE="coverage-%p.profraw"
-            find . -name "*.profraw" -exec llvm-profdata merge --sparse {} -o coverage.profdata \;
-            find ./tests ./src -type f -executable -name '*_test' > test_binaries.txt
-            llvm-cov show \
-              $(cat test_binaries.txt) \
-              -instr-profile=coverage.profdata \
-              --format=html \
-              -output-dir=coverage_report
-
+            find . -name "*.profraw"
+            llvm-profdata merge -sparse $(find . -name "coverage-*.profraw") -o cov.profdata
+            llvm-cov export -format=lcov \
+              src/calculator_test \
+              src/logger_test \
+              src/notifier_test \
+              tests/e2e_test \
+              tests/integ_test \
+              -instr-profile=cov.profdata > coverage.info
+            genhtml coverage.info --output-directory coverage_report
 
 
       - store_artifacts:
