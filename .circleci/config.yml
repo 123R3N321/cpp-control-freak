@@ -102,9 +102,11 @@ jobs:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
             cd build
+            cd testing
             ls -al
             mkdir -p coverage_report
             if [ -f "*.profraw" ]; then
+              echo "here"
               export LLVM_PROFILE_FILE="coverage-%p.profraw"
               find . -name "*.profraw" -exec llvm-profdata merge --sparse {} -o coverage.profdata \;
               llvm-cov show ./unit_tests -instr-profile=coverage.profdata --format=html -output-dir=coverage_report
