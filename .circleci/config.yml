@@ -107,11 +107,11 @@ jobs:
             find . -name "*.profraw"
             llvm-profdata merge -sparse $(find . -name "coverage-*.profraw") -o cov.profdata
             llvm-cov export -format=lcov \
-              src/calculator_test \
-              src/logger_test \
-              src/notifier_test \
-              tests/e2e_test \
-              tests/integ_test \
+              ./src/calculator_test \
+              ./src/logger_test \
+              ./src/notifier_test \
+              ./tests/e2e_test \
+              ./tests/integ_test \
               -instr-profile=cov.profdata > coverage.info
             genhtml coverage.info --output-directory coverage_report
 
