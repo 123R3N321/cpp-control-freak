@@ -40,6 +40,7 @@ jobs:
               clang-tidy \
               clang-format \
               lcov \
+              llvm \
               ninja-build \
               curl \
               zip \
