@@ -104,7 +104,7 @@ jobs:
           command: |  # shouldn't need to run tests again.
             cd build
             export LLVM_PROFILE_FILE="coverage-%p.profraw"
-            llvm-profdata merge -sparse src/coverage-*.profraw tests/coverage-*.profraw -o default.profdata
+            llvm-profdata merge -sparse $(find ./src -name "coverage-*.profraw") $(find ./tests -name "coverage-*.profraw") -o cov.profdata
             llvm-cov export -format=lcov \
               src/calculator_test \
               src/logger_test \
