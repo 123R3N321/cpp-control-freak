@@ -103,17 +103,12 @@ jobs:
           command: |  # shouldn't need to run tests again.
             cd build
             ls -al
-            if [ -f "*.profraw" ]; then
-              echo "here"
-              export LLVM_PROFILE_FILE="coverage-%p.profraw"
-              find . -name "*.profraw" -exec llvm-profdata merge --sparse {} -o coverage.profdata \;
-              llvm-cov show ./unit_tests -instr-profile=coverage.profdata --format=html -output-dir=coverage_report
-              echo "after"
-              ls -al
-            elif [ -f "*.gcda" ] || [ -f "*.gcno" ]; then
-              lcov --capture --directory . --output-file coverage.info
-              genhtml coverage.info --output-directory coverage_report
-            fi
+            echo "here"
+            export LLVM_PROFILE_FILE="coverage-%p.profraw"
+            find . -name "*.profraw" -exec llvm-profdata merge --sparse {} -o coverage.profdata \;
+            llvm-cov show ./unit_tests -instr-profile=coverage.profdata --format=html -output-dir=coverage_report
+            echo "after"
+            ls -al
 
 
       - store_artifacts:
