@@ -115,7 +115,7 @@ jobs:
             cd ../
             mkdir -p coverage_report
             llvm-profdata merge -sparse src/*.profraw tests/*.profraw -o coverage.profdata
-            llvm-cov export -format=lcov ./calculator_test -instr-profile=coverage.profdata > coverage.info
+            llvm-cov export -format=lcov ./src/calculator_test -instr-profile=coverage.profdata > coverage.info
             genhtml coverage.info --output-directory coverage_report
 
       - store_artifacts:
