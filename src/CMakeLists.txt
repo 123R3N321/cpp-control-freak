@@ -11,6 +11,7 @@ add_library(notifier
     notifier.cpp
 )
 
+# Include headers
 target_include_directories(logger
     INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include"
@@ -33,6 +34,7 @@ target_link_libraries(calculator
 add_library(calculator_lib INTERFACE)
 target_link_libraries(calculator_lib INTERFACE calculator logger notifier)
 
+# add unit tests
 add_executable(calculator_test
     calc_test.cpp
 )

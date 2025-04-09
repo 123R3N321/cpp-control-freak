@@ -47,12 +47,9 @@ jobs:
               unzip \
               tar \
               git \
-              python3 \
-              python3-pip \
               pkg-config \
               tzdata \
               wget \
-              gcovr \
               clang-18 llvm-18-dev libclang-18-dev
             CMAKE_VERSION=3.31.5
             CMAKE_TAR=cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
@@ -104,15 +101,6 @@ jobs:
           command: |  # shouldn't need to run tests again.
             cd build
             export LLVM_PROFILE_FILE="coverage-%p.profraw"
-            ls -al
-            echo "src"
-            cd src
-            ls -al
-            cd ../
-            cd tests
-            echo "tests"
-            ls -al
-            cd ../
             mkdir -p coverage_report
             llvm-profdata merge -sparse src/*.profraw tests/*.profraw -o coverage.profdata
             llvm-cov export -format=lcov ./src/calculator_test -instr-profile=coverage.profdata > coverage.info
