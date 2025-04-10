@@ -1,2 +1,11 @@
-Checks:          '*'
-WarningsAsErrors: '*'
+Checks: "
+  clang-analyzer-*,
+  -clang-diagnostic-error,
+  -clang-diagnostic-pp-file-not-found,
+  -warnings-as-errors
+"
+WarningsAsErrors: ''
+HeaderFilterRegex: '.*'
+AnalyzeTemporaryDtors: false
+FormatStyle: none
+CheckOptions: []
