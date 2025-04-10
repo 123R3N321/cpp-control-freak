@@ -98,8 +98,27 @@ jobs:
 
       - run:
           name: Run Clang-Format
-          command:  |
+          command:  | # since CI cannot really update the src code, set dry-run flag and --Werror flag
             find src/ -type f \( -name "*.cpp" -o -name "*.h" \) | xargs clang-format -i --Werror --dry-run      
+
+      - run:
+          name: Generate compile_commands.json for clang-tidy
+          command: |
+            mkdir -p build
+            cd build
+            cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+            cp compile_commands.json ../
+
+      # Run clang-tidy with proper include paths
+      - run:
+          name: Run clang-tidy
+          command: |
+            # Run clang-tidy with adjustments
+            for file in $(find src -name "*.cpp" -o -name "*.h"); do
+              echo "Checking $file..."
+              clang-tidy -p=. "$file" -- -I. -Isrc -Ibuild/_deps/googletest-src/googletest/include || true
+            done
+
 
       - run:
           name: Generate Coverage
