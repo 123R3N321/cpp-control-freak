@@ -106,6 +106,7 @@ jobs:
           command: |
             mkdir -p build
             cd build
+            export PATH=/opt/cmake/bin:$PATH
             cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
             cp compile_commands.json ../
 
