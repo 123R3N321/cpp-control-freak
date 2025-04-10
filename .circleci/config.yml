@@ -99,7 +99,7 @@ jobs:
       - run:
           name: Run Clang-Format
           command:  |
-            find src/ -type f \( -name "*.cpp" -o -name "*.h" \) | xargs clang-format -i      
+            find src/ -type f \( -name "*.cpp" -o -name "*.h" \) | xargs clang-format -i --Werror --dry-run      
 
       - run:
           name: Generate Coverage
