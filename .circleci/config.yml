@@ -95,7 +95,12 @@ jobs:
             ctest --test-dir build --output-on-failure
       - store_test_results:
           path: /tmp/test-results
-          
+
+      - run:
+          name: Run Clang-Format
+          command:  |
+            find src/ -type f \( -name "*.cpp" -o -name "*.h" \) | xargs clang-format -i      
+
       - run:
           name: Generate Coverage
           command: |  # shouldn't need to run tests again.
